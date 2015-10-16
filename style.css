@@ -1,0 +1,29 @@
+.game {
+	position: relative;
+	height: 100vh;
+	width: 600px;
+	background-color: cyan;
+}
+
+.sprite {
+	position: absolute;
+	height: 5%;
+	width: 5%;	
+}
+
+.plane {
+	bottom: 80%;
+	left: 30%;
+	background-color: white;
+}
+
+.bomb {
+	bottom: 65%;
+	left: 25%;
+	background-color: black;
+}
+
+.building-floor {
+	background-color: blue;
+}
+
