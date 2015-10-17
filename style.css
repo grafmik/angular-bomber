@@ -1,3 +1,8 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
 .game {
 	position: relative;
 	height: 100vh;
@@ -12,18 +17,38 @@
 }
 
 .plane {
-	bottom: 80%;
-	left: 30%;
 	background-color: white;
+	border: 3px solid black;
+	box-sizing: border-box;
+}
+
+.plane.crashed {
+	background-color: red;
+	border: 0;
 }
 
 .bomb {
-	bottom: 65%;
-	left: 25%;
 	background-color: black;
 }
 
 .building-floor {
 	background-color: blue;
+	border: 1px solid black;
+	box-sizing: border-box;
+}
+
+.mainmessage {
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    color: white;
+    text-align: center;
+	font-family: "Lucida Console", sans-serif;
+    font-size: 72px;
+    padding-top: 20%;
+    text-transform: uppercase;
 }
 
