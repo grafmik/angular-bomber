@@ -1,8 +1,8 @@
 var app = angular.module('angularbomber', [])
 
 app.controller('BomberController', ['$scope', function BomberController($scope) {
-    var SPRITE_WIDTH = 20;
-    var SPRITE_HEIGHT = 20;
+    var SPRITE_WIDTH = 5;
+    var SPRITE_HEIGHT = 5;
     var SPRITE_NB_ON_X = Math.floor(100 / SPRITE_WIDTH);
     var SPRITE_NB_ON_Y = Math.floor(100 / SPRITE_HEIGHT);
 
