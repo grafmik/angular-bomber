@@ -1,10 +1,10 @@
 var app = angular.module('angularbomber', [])
 
 app.controller('BomberController', ['$scope', function BomberController($scope) {
-    var SPRITE_WIDTH = 5;
-    var SPRITE_HEIGHT = 5;
-    var SPRITE_NB_ON_X = 100 / SPRITE_WIDTH;
-    var SPRITE_NB_ON_Y = 100 / SPRITE_HEIGHT;
+    var SPRITE_WIDTH = 20;
+    var SPRITE_HEIGHT = 20;
+    var SPRITE_NB_ON_X = Math.floor(100 / SPRITE_WIDTH);
+    var SPRITE_NB_ON_Y = Math.floor(100 / SPRITE_HEIGHT);
 
     var getRandomColor = function getRandomColor() {
         var letters = '0123456789ABCDEF'.split('');
@@ -26,24 +26,6 @@ app.controller('BomberController', ['$scope', function BomberController($scope) 
         return result;
     };
 
-    var initGame = function initGame() {
-        $scope.buildings = randomizeBuildings();
-        reprocessBuildingsToDisplay();
-        $scope.plane = {
-            active: true,
-            crashed: false,
-            x: 0,
-            y: 20
-        };
-        $scope.bomb = {
-            active: false
-        };
-        $scope.gameover = false;
-        $scope.levelfinished = false;
-        $scope.gamestopped = false;
-        $scope.intervalID = setInterval(function() { $scope.gameengine(); }, 150);
-    };
-
     var reprocessBuildingsToDisplay = function reprocessBuildingsToDisplay() {
         var result = [];
         angular.forEach($scope.buildings, function (building, xIndex){
@@ -52,8 +34,10 @@ app.controller('BomberController', ['$scope', function BomberController($scope) 
                     x: xIndex,
                     y: yIndex,
                     style: {
-                        "left" : (xIndex * SPRITE_WIDTH) + "%",
-                        "bottom" : (yIndex * SPRITE_HEIGHT) + "%",
+                        left : (xIndex * SPRITE_WIDTH) + "%",
+                        bottom : (yIndex * SPRITE_HEIGHT) + "%",
+                        height: SPRITE_HEIGHT + "%",
+                        width: SPRITE_WIDTH + "%",
                         "background-color" : building.color
                     },
                     color: building.color
@@ -66,8 +50,10 @@ app.controller('BomberController', ['$scope', function BomberController($scope) 
 
     var reprocessSpriteToDisplay = function reprocessSpriteToDisplay(sprite) {
         sprite.style = {
-            "left" : (sprite.x * SPRITE_WIDTH) + "%",
-            "bottom" : ((sprite.y - 1) * SPRITE_HEIGHT) + "%"
+            left : (sprite.x * SPRITE_WIDTH) + "%",
+            bottom : ((sprite.y - 1) * SPRITE_HEIGHT) + "%",
+            height: SPRITE_HEIGHT + "%",
+            width: SPRITE_WIDTH + "%"
         };
         // TODO : why is it needed to refresh plane??
         $scope.$apply();
@@ -171,6 +157,24 @@ app.controller('BomberController', ['$scope', function BomberController($scope) 
         if ($scope.plane.crashed && !$scope.plane.active && !$scope.bomb.active) {
             stopGameEngine();
         }
+    };
+
+    var initGame = function initGame() {
+        $scope.buildings = randomizeBuildings();
+        reprocessBuildingsToDisplay();
+        $scope.plane = {
+            active: true,
+            crashed: false,
+            x: 0,
+            y: SPRITE_NB_ON_Y
+        };
+        $scope.bomb = {
+            active: false
+        };
+        $scope.gameover = false;
+        $scope.levelfinished = false;
+        $scope.gamestopped = false;
+        $scope.intervalID = setInterval(function() { $scope.gameengine(); }, 150);
     };
 
     initGame();
