@@ -79,7 +79,7 @@ app.controller('BomberController', ['$scope', function BomberController($scope) 
         return ($scope.gameover || $scope.levelfinished);
     }
 
-    $scope.getMessageDisplayed = function isMessageDisplayed() {
+    $scope.getMessageDisplayed = function getMessageDisplayed() {
         var result = "";
         if ($scope.gameover) {
             result = "game over";
@@ -139,7 +139,7 @@ app.controller('BomberController', ['$scope', function BomberController($scope) 
                     target.height--;
                     reprocessBuildingsToDisplay();
                 }
-                if ($scope.bomb.y > 0) {
+                if ($scope.bomb.y > 1) {
                     // bomb is bombing
                     $scope.bomb.y--;
                 } else {
