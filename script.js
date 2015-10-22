@@ -76,7 +76,7 @@ app.controller('BomberController', ['$scope', function BomberController($scope) 
     };
 
     $scope.isMessageDisplayed = function isMessageDisplayed() {
-        return ($scope.gameover || $scope.levelfinished);
+        return ($scope.gamestopped || $scope.gameover || $scope.levelfinished);
     }
 
     $scope.getMessageDisplayed = function getMessageDisplayed() {
@@ -85,13 +85,15 @@ app.controller('BomberController', ['$scope', function BomberController($scope) 
             result = "game over";
         } else if ($scope.levelfinished) {
             result = "level finished";
+        } else {
+            result = "click to start";
         }
         return result;
     }
 
     $scope.mainClic = function mainClic() {
         if ($scope.gamestopped) {
-            initGame();
+            startGame();
         } else {
             launchBomb();
         }
@@ -159,7 +161,7 @@ app.controller('BomberController', ['$scope', function BomberController($scope) 
         }
     };
 
-    var initGame = function initGame() {
+    var startGame = function startGame() {
         $scope.buildings = randomizeBuildings();
         reprocessBuildingsToDisplay();
         $scope.plane = {
@@ -175,6 +177,12 @@ app.controller('BomberController', ['$scope', function BomberController($scope) 
         $scope.levelfinished = false;
         $scope.gamestopped = false;
         $scope.intervalID = setInterval(function() { $scope.gameengine(); }, 150);
+    };
+
+    var initGame = function initGame() {
+        $scope.buildings = randomizeBuildings();
+        reprocessBuildingsToDisplay();
+        $scope.gamestopped = true;
     };
 
     initGame();
